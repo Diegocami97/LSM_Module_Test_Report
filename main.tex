@@ -286,7 +286,7 @@ In contrast to surface testing, all electronic components were placed on a rack 
 
 Control and communication with each ACM board were performed using the local DAQ (LDAQ), comprising ACMDAQ, \texttt{acmpy}, a sequencer, and a decoder \todonote{we still need to add the citation for the ACMDAQ/acmpy GitHub repository and the SSM (Sravan?) thesis describing the LDAQ software stack.}. ACMDAQ is a C++ server that communicates directly with the ACM via hexadecimal messages over Ethernet. The Python package \texttt{acmpy} interfaces with ACMDAQ and provides high-level CCD control. The sequencer file, written in the LSST sequencer language \todonote{we still need to cite the LSST camera sequencer language reference, or the DAMIC-M internal note describing its adaptation.}, is compiled within \texttt{acmpy} and transmitted to the ACM FPGA to define the clock sequencing. Each ACM board is operated by an independent LDAQ instance, which can run either standalone or under the central DAQ (CDAQ) \todonote{we still need to cite the CDAQ software/documentation.}.
 
-For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. Table~\ref {tab: sequencer_timing_dm13} summarizes the timing parameters used for production modules. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (NDCM=1) readout.
+For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. Table~\ref{tab:sequencer_timing_dm13} summarizes the timing parameters used for production modules. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (NDCM=1) readout.
 %
 \begin{table}[H]
 \centering
@@ -385,7 +385,7 @@ ACM channels      & 2, 3   & 3, 2   & 0, 1   & 1, 0   \\
 
 
 \subsection{Image list}
-A total of seven image types were acquired at high (185 K) and low (135 K) temperatures to characterize detector performance under different operating conditions. The datasets include full-array exposures, serial-register readouts, and multi-skip images. Table~\ref {tab: image_summary} summarizes the image configurations and their primary objectives.
+A total of seven image types were acquired at high (185 K) and low (135 K) temperatures to characterize detector performance under different operating conditions. The datasets include full-array exposures, serial-register readouts, and multi-skip images. Table~\ref{tab:image_summary} summarizes the image configurations and their primary objectives.
 
 
 \begin{table}[H]
@@ -604,7 +604,7 @@ A limited number of modules contain serial-register defects in more than one CCD
 \label{sec:lowtemp}
 \subsection{Skipper performance}
 DAMIC-M CCDs are operated in skipper mode to achieve single-electron resolution. Nominal skipper performance was verified by reading out 630 $x$-overscan pixels with 500 NDCMs.
-At 135\,K, the test system's dark current is greatly reduced relative to higher-temperature operation. To estimate skipper performance under these conditions, we transferred 10 pixels from the serial register into the floating gate before measurement to ensure sufficient charge in the image pixels. This was done by collecting six \texttt{Image\_3\_135}.
+At 135\,K, the test system's dark current is greatly reduced relative to higher-temperature operation. To estimate skipper performance under these conditions, 10 pixels from the serial register were transferred into the floating gate before measurement to ensure sufficient charge in the image pixels. This was done by collecting six \texttt{Image\_3\_135}.
 
 The distribution of pixel values, averaged over the NDCMs, was fit with a Poisson distribution convolved with a Gaussian. The distance between consecutive peaks provides an estimate of the amplifier gain (in ADU/$e^-$), while the width of the peaks (measured as the standard deviation) provides an estimate of the readout noise.
 The Poisson rate parameter $\lambda$ provides the average charge collected per pixel, which is proportional to the serial register dark current plus clock-induced charge (CIC). CIC arises from the rapidly changing electric fields caused by voltage swings of the gates during charge transfer and depends on the clock amplitude and rise time~\cite{Oscura:2023qik}. Serial clocks are the primary contributors to CIC, since they swing at a higher frequency than parallel clocks.
@@ -690,22 +690,14 @@ The top panel of Fig.~\ref{fig:ironfoil} shows a scatter plot of $\sigma_{xy}$ v
 These events consist predominantly of $^{55}$Fe X-rays originating from the iron foils. 
 Two clearly separated populations are observed, corresponding to front- and back-side interactions. 
 The displacement of these populations along the $x$-axis reflects the physical placement of the iron foils above specific regions of the CCD. 
-The bottom panel of Fig.~\ref{fig:ironfoil} presents the energy spectrum of front-side clusters selected with $\sigma_{xy}<1$\, pixel. 
+The bottom panel of Fig.~\ref{fig:ironfoil} presents the energy spectrum of front-side clusters selected with $\sigma_{xy}<1$\,pixel. 
 Because front-side events deposit their charge over fewer pixels, they exhibit a higher signal-to-noise ratio and therefore a cleaner spectral structure.
 
 It is important to distinguish between the surface and underground analyses of the $^{55}$Fe data. 
 The scatter plot in Fig.~\ref{fig:ironfoil} corresponds to on-surface tests performed with full-array single-skip images, which were used to identify the spatial distribution of the Fe-55 events and validate the depth-based separation via $\sigma_{xy}$. 
 For the underground low-temperature characterization at LSM (135\,K), a dedicated acquisition strategy was adopted. 
 In particular, Image\_5 was selected: a cropped region of 1280 columns by 480 rows, centered on the area illuminated by the iron foils and read out with 500 skips.
-This configuration enhances the signal-to-noise ratio and enables high-resolution measurements of the energy response and CTI-sensitive cluster morphology in the region of interest.
-Fig.~\ref{fig:fe55image5region} reproduces the on-surface scatter plot of Fig.~\ref{fig:ironfoil} with the Image\_5 crop region overlaid, showing that it captures the boundary between the front- and back-side populations used in the underground analysis.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{figures/ironfoil_sigma_xy_image5region.png}
-    \caption[Image\_5 crop region]{On-surface $\sigma_{xy}$ versus mean-$x$ scatter plot of Fig.~\ref{fig:ironfoil} (top panel), with a vertical line marking the boundary of the cropped, 500-skip Image\_5 region (1280 columns $\times$ 480 rows) used for the underground low-temperature $^{55}$Fe characterization at 135\,K.}
-    \label{fig:fe55image5region}
-\end{figure}
+This configuration enhances the signal-to-noise ratio and enables high-resolution measurements of the energy response and CTI-sensitive cluster morphology in the region of interest. As shown in the top panel of Fig.~\ref{fig:ironfoil}, the Image\_5 crop region (1280 columns $\times$ 480 rows) is centered on the boundary between the front- and back-side populations used in the underground analysis.
 
 In the following subsections, the underground cropped multi-skip data are used to (i) validate the keV-scale energy calibration and resolution at operating temperature, and (ii) perform CTI-sensitive studies based on composite-cluster morphology and charge asymmetry diagnostics.
 
@@ -776,7 +768,7 @@ To quantify charge asymmetries around this core, four adjacent regions are defin
 \item \textbf{Left:} region located at negative $\Delta x$, probing charge extending to the left of the cluster core.
 \end{itemize}
 
-Fig.~\ref {fig: front_composite_example} shows an example composite cluster illustrating these regions.
+Fig.~\ref{fig:front_composite_example} shows an example composite cluster illustrating these regions.
 The colored boxes indicate the areas used to evaluate the directional charge fractions.
 
 \begin{figure}[H]
@@ -892,7 +884,7 @@ The RMS of the parallel projection is more tightly distributed than the serial-d
 \subsection{keV-scale calibration}
 \label{sec:kev_calibration}
 
-$^{55}$Fe decays produce two characteristic X-ray lines in the sensor, Mn K$\alpha$ (5.90\,keV) and Mn K$\beta$ (6.49\,keV), which provide an absolute keV-scale calibration of the pixel charge measured in electrons. Front-side events ($\sigma_{xy}<1$\, pixel, Sec.~\ref{sec:CTI}) are used for this calibration because their compact clusters yield a substantially better-resolved spectrum than the more diffuse back-side population (Fig.~\ref{fig:ironfoil}, bottom). Figure~\ref{fig:energy_vs_sigmaxy} shows this front/back separation directly in the energy-$\sigma_{xy}$ plane, for a representative extension (DM01, Ext.\ 4), at both the nominal LBC bias point and the revised $\mathrm{VR}=-6$\,V setting discussed below.
+$^{55}$Fe decays produce two characteristic X-ray lines in the sensor, Mn K$\alpha$ (5.90\,keV) and Mn K$\beta$ (6.49\,keV), which provide an absolute keV-scale calibration of the pixel charge measured in electrons. Front-side events ($\sigma_{xy}<1$\,pixel, Sec.~\ref{sec:CTI}) are used for this calibration because their compact clusters yield a substantially better-resolved spectrum than the more diffuse back-side population (Fig.~\ref{fig:ironfoil}, bottom). Figure~\ref{fig:energy_vs_sigmaxy} shows this front/back separation directly in the energy-$\sigma_{xy}$ plane, for a representative extension (DM01, Ext.\ 4), at both the nominal LBC bias point and the revised $\mathrm{VR}=-6$\,V setting discussed below.
 
 \begin{figure}[H]
     \centering
@@ -977,7 +969,7 @@ q_{\mathrm{dst}}^{\mathrm{corrected}} = q_{\mathrm{dst}}
 \, q_{\mathrm{src}} .
 \end{equation}
 
-Here, $ \ alpha _ {\ mathrm {null}} $: the horizontal axis shows the source CCD pixel charge, and the vertical axis shows the destination CCD pixel charge. It is computed by randomizing the spatial positions of all seed pixels in the source image, breaking the correlation.
+Here $\alpha_{\mathrm{null}}$ represents the null-hypothesis correction, which accounts for correlations arising from statistical fluctuations or selection effects. It is computed by randomizing the spatial positions of all seed pixels in the source image, breaking the correlation.
 
 
 Figure~\ref{fig:CrosstalkDM16} shows the pairwise crosstalk characterization between the four CCD channels. Each panel corresponds to an ordered pair (src, dst), where the horizontal axis shows the source CCD pixel charge and the vertical axis shows the destination CCD pixel charge. Each blue point represents the charge for the selected seed pixels for both source and destination CCDs. The black line represents the computed linear correlation between the source and destination pixel charges; its slope corresponds to the crosstalk coefficient, and the red dashed line represents the linear correlation corrected under the null hypothesis.
@@ -1073,7 +1065,7 @@ Two items remain open following this campaign. The apparent failure of Extension
 
 \paragraph{Detector status.} Of the 28 modules tested underground, 103 CCDs are operational in the final detector configuration, spread across 26 production modules with four CCDs each, except DM11, which has three (Ext.\ 2 was found non-functional despite working during the on-surface campaign at UW). DM08 and DM12 are excluded from the final array due to non-operational extensions and large defects; all plots and summary statistics elsewhere in this report that quote ensemble averages exclude these two modules unless noted otherwise. The effective target mass of the final array is $\approx 347$\,g. DM10, DM24, DM25, and DM26 exhibit consistently higher dark current than the rest of the ensemble (Sec.~\ref{sec:lowtemp}), and vertical (parallel-direction) CTI is observed across modules under the nominal LBC operating parameters (Sec.~\ref{sec:CTI}); lowering $\mathrm{VR}$ to $-6$\,V reduces the $^{55}$Fe energy-scale shift, though the resulting non-linearity still needs to be characterized with higher statistics (Sec.~\ref{sec:kev_calibration}).
 
-Table~\ref {tab: summary_metrics} gives the full per-module breakdown of these metrics (operational CCDs, gain, SER, dark current, and CTI fractions).
+Table~\ref{tab:summary_metrics} gives the full per-module breakdown of these metrics (operational CCDs, gain, SER, dark current, and CTI fractions).
 
 % Example: include a per-CCD grid of something
 % \figgridfour
