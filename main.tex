@@ -137,7 +137,7 @@ Temperature points: & \TempPoints \\
 \label{sec:summary}
 
 \subsection{Overview}
-This document summarizes the testing activities carried out at LSM between May and October 2025 (modules were received and placed in storage at LSM beginning May 23, 2025). During this period, the 28 DM production modules intended for installation in the final DAMIC-M detector were received, stored, and tested underground at LSM. All measurements were performed using the JH2 test chamber (TC), which was also used during the surface testing of the individual CCD dies and modules.
+This document summarizes the testing activities carried out at LSM between May and October 2025 (modules were received and placed in storage at LSM beginning May 23, 2025). During this period, the 28 DM production modules intended for installation in the final DAMIC-M detector were received, stored, and tested underground at LSM. All measurements were performed using the JH2 test chamber, which was also used during the surface testing of the individual CCD dies and modules.
 
 The performance of each DM module is presented across several key metrics, including single-electron resolution, readout noise, calibration constants, and dark current. Due to the rapid turnaround required for each module set, dark current measurements were not performed extensively. Defects in the CCD active region and in the serial register were identified using procedures consistent with those applied during surface testing at UW. Charge-transfer inefficiencies were also studied for each CCD using events from the decay of a $^{55}$Fe foil installed inside each module lid. These events, reconstructed both at the surface and in the CCD bulk, also provided a keV-scale calibration source for detailed characterization. All calibration and event-reconstruction analyses described in this report were performed using the WADERS framework, with dedicated code developed to process its output.
 
@@ -157,7 +157,7 @@ The following two subsections present a high-level summary of the average per-mo
       \item Extension 2 in DM-11 appears non-functional in contrast to on-surface test results.
       \item DM10 showed consistently higher DC levels than all other operational modules across two different installations.
       \item High levels of DC initially observed in modules DM-24, -25, and -26 were restored to average levels after the second installation.
-      \item Vertical CTI was consistently observed across all CCD modules when using LBC operating parameters.
+      \item Vertical CTI was consistently observed across all CCD modules when using LBC operating parameters. \todonote{we still need to spell out LBC at its first use here.}
     \end{itemize}
   \item Recommended actions/rework/retest:
     \begin{itemize}[leftmargin=1.2em]
@@ -286,7 +286,7 @@ In contrast to surface testing, all electronic components were placed on a rack 
 
 Control and communication with each ACM board were performed using the local DAQ (LDAQ), comprising ACMDAQ, \texttt{acmpy}, a sequencer, and a decoder \todonote{we still need to add the citation for the ACMDAQ/acmpy GitHub repository and the SSM (Sravan?) thesis describing the LDAQ software stack.}. ACMDAQ is a C++ server that communicates directly with the ACM via hexadecimal messages over Ethernet. The Python package \texttt{acmpy} interfaces with ACMDAQ and provides high-level CCD control. The sequencer file, written in the LSST sequencer language \todonote{we still need to cite the LSST camera sequencer language reference, or the DAMIC-M internal note describing its adaptation.}, is compiled within \texttt{acmpy} and transmitted to the ACM FPGA to define the clock sequencing. Each ACM board is operated by an independent LDAQ instance, which can run either standalone or under the central DAQ (CDAQ) \todonote{we still need to cite the CDAQ software/documentation.}.
 
-For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. Table~\ref{tab:sequencer_timing_dm13} summarizes the timing parameters used for production modules. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (NDCM=1) readout.
+For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. Table~\ref{tab:sequencer_timing_dm13} summarizes the timing parameters used for production modules. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (non-destructive charge measurement, NDCM=1) readout.
 %
 \begin{table}[H]
 \centering
@@ -510,7 +510,7 @@ The total acquisition time at 185 K was 5\,hr 22\,min 8\,s. This data-acquisitio
 \section{High-temperature image analyses}
 \label{sec:hightemp}
 
-As in the die- and module-level surface testing, a series of measurements at 185~K were performed to efficiently identify defects in each CCD within each module. Although 185~K is not the nominal operating temperature of the DAMIC-M experiment, additional images were acquired at this temperature to further characterize each module's overall Skipper-CCD performance. These measurements were used to evaluate key performance metrics, including readout noise, single-electron resolution, dark current, and gain, and to investigate potential temperature-dependent effects.
+As in the die- and module-level surface testing, a series of measurements at 185~K were performed to efficiently identify defects in each CCD within each module. Although 185~K is not the nominal operating temperature of the DAMIC-M experiment, additional images were acquired at this temperature to further characterize each module's overall skipper-CCD performance. The column- and serial-register defect analyses in this section use these 185~K images; the corresponding quantitative performance metrics -- single-electron resolution, gain, and dark current, including a direct comparison of dark current at 185~K and 135~K -- are presented alongside their 135~K counterparts in Section~\ref{sec:lowtemp} to enable a direct temperature comparison.
 
 
 % \subsection{Skipper performance}
@@ -547,7 +547,7 @@ This procedure produces a defect map detailing the locations, types, and numbers
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{figures/DM06_col_defect_map.png}
-    \caption[Composite image analysis]{Column defect map obtained from a composite image built from six images for each CCD in module DM06. Particle tracks are filtered out, revealing hot columns (bottom panel). The $x$- and $y$-overscan steps are visible in each panel.
+    \caption[Column defect map, DM06]{Column defect map obtained from a composite image built from six images for each CCD in module DM06. Particle tracks are filtered out, revealing hot columns (bottom panel). The $x$- and $y$-overscan steps are visible in each panel.
     }
     \label{fig:composite_image}
 \end{figure}
@@ -564,7 +564,7 @@ Module DM-08 contains a large column defect in CCD A that produces amplifier glo
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{figures/image4_high_column_defects_all_modules.pdf}
-    \caption[Composite image analysis]{Number of column defects identified from the composite Image\_4 dataset at 185~K for each CCD (A–D) across all production modules. The gray band indicates the mean defect count $\pm 1\sigma$ across the full dataset, and the dashed horizontal line marks the global mean value of 9.91 defects per CCD.
+    \caption[Column defect count, all modules]{Number of column defects identified from the composite Image\_4 dataset at 185~K for each CCD (A–D) across all production modules. The gray band indicates the mean defect count $\pm 1\sigma$ across the full dataset, and the dashed horizontal line marks the global mean value of 9.91 defects per CCD.
     }
     \label{fig:column_defects}
 \end{figure}
@@ -583,7 +583,7 @@ Defects in both serial registers of each CCD were identified using the same medi
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{figures/image2_high_file_DM18.png}
-    \caption[Composite image analysis]{Number of SR defects identified from the composite Image\_2 dataset at 185~K for each CCD (A–D) in module DM18.
+    \caption[SR defect count, DM18]{Number of SR defects identified from the composite Image\_2 dataset at 185~K for each CCD (A–D) in module DM18.
     }
     \label{fig:DM18_SR_defects}
 \end{figure}
@@ -600,7 +600,7 @@ A limited number of modules contain serial-register defects in more than one CCD
 %           Low-temperature image analyses
 % =====================================================
 \newpage
-\section{Low-temperature image analysis}
+\section{Low-temperature image analyses}
 \label{sec:lowtemp}
 \subsection{Skipper performance}
 DAMIC-M CCDs are operated in skipper mode to achieve single-electron resolution. Nominal skipper performance was verified by reading out 630 $x$-overscan pixels with 500 NDCMs.
@@ -615,7 +615,7 @@ Figure~\ref{fig:DM09_SE_fits} illustrates the Poisson-convolved-Gaussian fits to
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{figures/DM09_Image_31_Low.png}
-    \caption[Composite image analysis]{Pixel charge distributions (averaged over 500 NDCMs) for the four CCD extensions (EXT1–EXT4) of module DM-09 at 135\,K, obtained from \texttt{Image\_3\_135}. The red curves show fits to a Poisson distribution convolved with a Gaussian. The spacing between consecutive peaks provides the amplifier gain (in ADU/$e^-$), while the peak width corresponds to the resolution ($\sigma$). The fitted Poisson parameter $\lambda$ represents the average collected charge per pixel, associated with serial register dark current and clock-induced charge.
+    \caption[Single-electron peak fits, DM09]{Pixel charge distributions (averaged over 500 NDCMs) for the four CCD extensions (EXT1–EXT4) of module DM-09 at 135\,K, obtained from \texttt{Image\_3\_135}. The red curves show fits to a Poisson distribution convolved with a Gaussian. The spacing between consecutive peaks provides the amplifier gain (in ADU/$e^-$), while the peak width corresponds to the resolution ($\sigma$). The fitted Poisson parameter $\lambda$ represents the average collected charge per pixel, associated with serial register dark current and clock-induced charge.
     }
     \label{fig:DM09_SE_fits}
 \end{figure}
@@ -1046,7 +1046,7 @@ The four modules recommended for the outermost array positions are therefore DM1
 
 This report has presented the underground characterization of the 28 DM production modules tested at LSM between May and October 2025, evaluated against the sensor-level performance requirements of the DAMIC-M experiment. Of the modules tested, 103 CCDs are operational in the final array configuration, spread across 26 modules with four operational CCDs each except DM11, which has three, for an effective target mass of approximately 347\,g (Sec.~\ref{sec:summary}).
 
-Across the ensemble, single-electron resolution, amplifier gain, and dark current at 135\,K are consistent with expectations for most extensions, with column and serial-register defect rates remaining low overall (Secs.~\ref{sec:hightemp}, \ref{sec:lowtemp}). Vertical (parallel-direction) charge transfer inefficiency is consistently observed across the module set under nominal LBC operating parameters, and DM-12 in particular shows a genuine directional asymmetry in its back-side cluster morphology that merits further investigation (Sec.~\ref{sec:CTI}). The keV-scale energy-scale shift observed in the $^{55}$Fe calibration lines is well explained by pixel-charge nonlinearity in the skipper amplifier response, and is partially mitigated by lowering the reference voltage to $\mathrm{VR}=-6$\, V (Sec.~\ref{sec:kev_calibration}). A single crosstalk correction matrix was consistently applicable across all ACMs and modules tested.
+Across the ensemble, single-electron resolution, amplifier gain, and dark current at 135\,K are consistent with expectations for most extensions (Sec.~\ref{sec:lowtemp}), with column and serial-register defect rates remaining low overall (Sec.~\ref{sec:hightemp}). Vertical (parallel-direction) charge transfer inefficiency is consistently observed across the module set under nominal LBC operating parameters, and DM-12 in particular shows a genuine directional asymmetry in its back-side cluster morphology that merits further investigation (Sec.~\ref{sec:CTI}). The keV-scale energy-scale shift observed in the $^{55}$Fe calibration lines is well explained by pixel-charge nonlinearity in the skipper amplifier response, and is partially mitigated by lowering the reference voltage to $\mathrm{VR}=-6$\,V (Sec.~\ref{sec:kev_calibration}). A single crosstalk correction matrix was consistently applicable across all ACMs and modules tested.
 
 DM-08 and DM-12 are excluded from the final detector array due to a large column defect and associated amplifier glow (DM-08) and non-operational extensions (DM-12). Based on dark current as the primary discriminating metric, cross-checked against single-electron resolution and CTI, DM10, DM11, DM24, and DM26 are recommended for the outermost positions of the final array (Sec.~\ref{sec:outermost_modules}).
 
