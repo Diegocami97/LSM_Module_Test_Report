@@ -139,7 +139,7 @@ Temperature points: & \TempPoints \\
 \subsection{Overview}
 This document summarizes the testing activities carried out at LSM between May and October 2025 (modules were received and placed in storage at LSM beginning May 23, 2025). During this period, the 28 DM production modules intended for installation in the final DAMIC-M detector were received, stored, and tested underground at LSM. All measurements were performed using the JH2 test chamber (TC), which was also used during the surface testing of the individual CCD dies and modules.
 
-The performance of each DM module is presented across several key metrics, including single-electron resolution, readout noise, calibration constants, and dark current. Due to the rapid turnaround required for each module set, dark current measurements were not performed extensively. Defects in the CCD active region and in the serial register were identified using procedures consistent with those applied during surface testing at UW. Charge-transfer inefficiencies were also studied for each CCD using events from the decay of a $^{55}$Fe foil installed inside each module lid. These events, reconstructed both at the surface and in the bulk of the CCD, additionally provided a keV-scale calibration source used for detailed characterization. All calibration and event-reconstruction analyses described in this report were performed using the WADERS framework, with dedicated code developed to process its output.
+The performance of each DM module is presented across several key metrics, including single-electron resolution, readout noise, calibration constants, and dark current. Due to the rapid turnaround required for each module set, dark current measurements were not performed extensively. Defects in the CCD active region and in the serial register were identified using procedures consistent with those applied during surface testing at UW. Charge-transfer inefficiencies were also studied for each CCD using events from the decay of a $^{55}$Fe foil installed inside each module lid. These events, reconstructed both at the surface and in the CCD bulk, also provided a keV-scale calibration source for detailed characterization. All calibration and event-reconstruction analyses described in this report were performed using the WADERS framework, with dedicated code developed to process its output.
 
 The following two subsections present a high-level summary of the average per-module performance metrics. For a more detailed description of each metric and the corresponding analysis procedures, see Sections~\ref{sec:hightemp}--\ref{sec:lowtemp}.
 
@@ -232,7 +232,7 @@ DM28 & 4 & 1.3075 & 0.1374 & 0.1028 & 0.00050 & 0.00075 \\
 
 \subsection{Hardware configuration}
 
-The CCD test setup is shown in Fig.~\ref{fig:JHUChamberExterior}. The setup was one of two test systems designed and provided by Johns Hopkins University, constructed in an ISO-6 cleanroom at the University of Chicago, shipped to UW for surface testing, and subsequently sent to LSM for underground testing. Each system was designed to accommodate up to four CCD dice or modules; however, only three were tested simultaneously due to electronics availability. The systems consisted of the following components:
+The CCD test setup is shown in Fig.~\ref{fig:JHUChamberExterior}. Johns Hopkins University designed and provided this setup as one of two test systems, built in an ISO-6 cleanroom at the University of Chicago, shipped to UW for surface testing, and then sent to LSM for underground testing. Each system was designed to accommodate up to four CCD dice or modules; however, only three were tested simultaneously due to electronics availability. The systems consisted of the following components:
 
 \begin{figure}[H]
     \centering
@@ -243,13 +243,13 @@ The CCD test setup is shown in Fig.~\ref{fig:JHUChamberExterior}. The setup was 
 
 \begin{itemize}
 
-\item Cryostat and vacuum chain: The test system was based on a stainless-steel vacuum cryostat mounted on top of a wheeled cart for transport. Below the chamber was a Pfeiffer HiCube 80 Eco turbomolecular pump, electrically isolated from the test chamber via a ceramic vacuum fitting. The residual pressure inside the cryostat was monitored by a Pfeiffer PTR91 dual Pirani/cold cathode\footnote{Since the cold cathode operates via high-voltage glow discharge, which can generate detectable photons and electromagnetic interference, the gauge was powered off during CCD testing.} gauge and reached ${\lesssim}10^{-4}\text{\,mbar}$ at room temperature. The pump and pressure gauge had external Ethernet connections for monitoring (Pfeiffer CenterOne) and control (Perle Iolan DS1).
+\item Cryostat and vacuum chain: The test system used a stainless-steel vacuum cryostat mounted on a wheeled cart for transport. A Pfeiffer HiCube 80 Eco turbomolecular pump sat below the chamber, electrically isolated from the test chamber via a ceramic vacuum fitting. The residual pressure inside the cryostat was monitored by a Pfeiffer PTR91 dual Pirani/cold cathode\footnote{Since the cold cathode operates via high-voltage glow discharge, which can generate detectable photons and electromagnetic interference, the gauge was powered off during CCD testing.} gauge and reached ${\lesssim}10^{-4}\text{\,mbar}$ at room temperature. The pump and pressure gauge had external Ethernet connections for monitoring (Pfeiffer CenterOne) and control (Perle Iolan DS1).
     
-\item Thermal chain: The cryostat was equipped with a Cryotel GT cryocooler with active vibration cancellation. The air-side cooling fins were enclosed by a 3D-printed shroud with a fan to prevent overheating. Inside the cryostat, the aluminum CCD boxes were thermally coupled to the cryocooler cold end via a copper bar. A layer of Kapton tape was used to electrically isolate the bar from the cryocooler, and a plastic KF fitting was used to isolate the cryocooler body from the cryostat. Resistance temperature detectors (RTDs) were positioned on the cryocooler cold end, on the thermal bar, and on the outer CCD boxes (two RTDs). The RTDs and a resistive heater mounted to the copper bar were connected in a PID control loop with a Lakeshore 336 temperature controller via a custom vacuum-air interface board with D-sub connections. A PTFE table provided mechanical support to the CCD boxes, as well as thermal and electrical isolation from the chamber walls.
+\item Thermal chain: The cryostat was equipped with a Cryotel GT cryocooler with active vibration cancellation. A 3D-printed shroud with a fan enclosed the air-side cooling fins to prevent overheating. Inside the cryostat, the aluminum CCD boxes were thermally coupled to the cryocooler cold end via a copper bar. A layer of Kapton tape electrically isolated the bar from the cryocooler, and a plastic KF fitting isolated the cryocooler body from the cryostat. Resistance temperature detectors (RTDs) were positioned on the cryocooler cold end, on the thermal bar, and on the outer CCD boxes (two RTDs). The RTDs and a resistive heater mounted to the copper bar were connected in a PID control loop with a Lakeshore 336 temperature controller via a custom vacuum-air interface board with D-sub connections. A PTFE table provided mechanical support to the CCD boxes, as well as thermal and electrical isolation from the chamber walls.
 
-An important difference between the thermal chain used during surface testing and that used during underground testing concerned the active balancer controlling the cryocooler. Following surface testing, the cryocoolers were sent to Ametek for inspection and repair, as multiple issues were reported, including overcurrent incidents that caused instrument shutdown, audible ringing from the active balancer vibrating against the cryocooler, and low-frequency noise introduced by the active vibration control system. Despite intervention by Ametek technicians upon arrival and installation at LSM, the cryocooler configuration—consisting of an AVC balancer and a second-generation AVC controller—continued to exhibit overcurrent and low-frequency noise. 
+A key difference between the thermal chain used during surface testing and that used during underground testing was the active balancer controlling the cryocooler. Following surface testing, the cryocoolers were sent to Ametek for inspection and repair, as multiple issues were reported, including overcurrent incidents that caused instrument shutdown, audible ringing from the active balancer vibrating against the cryocooler, and low-frequency noise introduced by the active vibration control system. Despite Ametek technicians' intervention upon arrival and installation at LSM, the cryocooler configuration—consisting of an AVC balancer and a second-generation AVC controller—continued to exhibit overcurrent and low-frequency noise. 
 
-The overcurrent issue that prevented prolonged cryocooler operation was resolved by using a second-generation AVC balancer from Ametek. However, this AVC model consistently introduced low-frequency noise, resulting in overall readout noise levels higher than those previously observed. As a result, a first-generation AVC balancer was used throughout the testing, as it provided stable, continuous operation and acceptable noise levels. Figure~\ref{fig:psd_avc} shows the noise level evolution across three configurations:
+A second-generation AVC balancer from Ametek resolved the overcurrent issue that prevented prolonged cryocooler operation. However, this AVC model consistently introduced low-frequency noise, resulting in overall readout noise levels higher than those previously observed. As a result, a first-generation AVC balancer was used throughout the testing, as it provided stable, continuous operation and acceptable noise levels. Figure~\ref{fig:psd_avc} shows the noise level evolution across three configurations:
 
 \begin{itemize}
 \item \textbf{Blue (July 3)}: Gen2 AVC, new controller from Ametek mid-June, Meanwell power supply
@@ -267,28 +267,26 @@ The overcurrent issue that prevented prolonged cryocooler operation was resolved
     \label{fig:psd_avc}
 \end{figure}
     
-\item Detectors and electronics chain: Inside the cryostat, each CCD module flex cable was plugged into a Kapton extension cable, which carried the clocks, biases, and amplifier output signals. The extension cables were connected to a vacuum-air interface board with Samtec connections. Outside the chamber, three front-end boards (one per CCD die or module), plugged into the vacuum feedthrough, performed the initial signal amplification. High-speed twinax cables (Samtec ERCD-030-120.0-TBR-TTL-1-C) connected the front-end boards to the main electronics racks located outside the cleanroom.
+\item Detectors and electronics chain: Inside the cryostat, each CCD module flex cable plugged into a Kapton extension cable that carried the clocks, biases, and amplifier output signals. The extension cables were connected to a vacuum-air interface board with Samtec connections. Outside the chamber, three front-end boards (one per CCD die or module), plugged into the vacuum feedthrough, performed the initial signal amplification. High-speed twinax cables (Samtec ERCD-030-120.0-TBR-TTL-1-C) connected the front-end boards to the main electronics racks located outside the cleanroom.
 
 \end{itemize}
-
-
 
 In contrast to surface testing, all electronic components were placed on a rack within the cleanroom, adjacent to the testing setup. The main electronic components were grouped into two categories:
 
 \begin{itemize}
 
-\item Slow control: This system monitored and controlled the cryostat service equipment (cryocoolers, vacuum pumps, temperature controllers) using custom C-based back-end software with a PHP-based front-end interface \cite{DAMIC-M:2024ooa,slowcontrol}. Communication with the electronics modules was performed over a local wired network, converting from serial protocols to TCP when necessary. The system status was logged in a MySQL database, and alarms were triggered if parameters exceeded predefined bounds. 
+\item Slow control: This system monitored and controlled the cryostat service equipment (cryocoolers, vacuum pumps, temperature controllers) using custom C-based back-end software with a PHP-based front-end interface \cite{DAMIC-M:2024ooa,slowcontrol}. The system communicated with the electronics modules over a local wired network, converting from serial protocols to TCP when necessary. The system logged status in a MySQL database, and triggered alarms if parameters exceeded predefined bounds. 
 
-\item Data acquisition: This system was responsible for CCD control and data taking. A Wiener VME195x crate housed the test chamber, which contained three Acquisition and Control Modules (ACMs), each connected to a front-end board on the cryostat. The ACMs generated bias and clock voltages for the CCDs and processed their output signals through four channels, one per CCD, during module testing \cite{Gaior:2023wfr}. A dedicated clock-synchronization board enabled synchronous operation of the ACMs during CCD readout. A suite of Acopian linear power supplies provided low-noise DC voltages to the VME crates (±15 V, +30 V). An additional Linux server set the CCD operating parameters, executed readout, and served as local data storage.
+\item Data acquisition: This system handled CCD control and data taking. A Wiener VME195x crate housed the test chamber, which contained three Acquisition and Control Modules (ACMs), each connected to a front-end board on the cryostat. During module testing, the ACMs generated bias and clock voltages for the CCDs and processed their output signals through four channels, one per CCD \cite{Gaior:2023wfr}. A dedicated clock-synchronization board enabled synchronous ACM operation during CCD readout. A suite of Acopian linear power supplies provided low-noise DC voltages to the VME crates (±15 V, +30 V). An additional Linux server set the CCD operating parameters, executed readout, and served as local data storage.
 
 \end{itemize}
 
 
 \subsection{DAQ configuration}
 
-Control and communication with each ACM board were performed using the local DAQ (LDAQ), comprising ACMDAQ, \texttt{acmpy}, a sequencer, and a decoder \todonote{we still need to add the citation for the ACMDAQ/acmpy GitHub repository and the SSM (Sravan?) thesis describing the LDAQ software stack.}. ACMDAQ is a C++ server that communicates directly with the ACM via hexadecimal messages over Ethernet. The Python package \texttt{acmpy} interfaces with ACMDAQ and provides high-level control of the CCD. The sequencer file, written in the LSST sequencer language \todonote{we still need to cite the LSST camera sequencer language reference, or the DAMIC-M internal note describing its adaptation.}, is compiled within \texttt{acmpy} and transmitted to the ACM FPGA to define the clock sequencing. Each ACM board is operated by an independent LDAQ instance, which can run either standalone or under the central DAQ (CDAQ) \todonote{we still need to cite the CDAQ software/documentation.}.
+Control and communication with each ACM board were performed using the local DAQ (LDAQ), comprising ACMDAQ, \texttt{acmpy}, a sequencer, and a decoder \todonote{we still need to add the citation for the ACMDAQ/acmpy GitHub repository and the SSM (Sravan?) thesis describing the LDAQ software stack.}. ACMDAQ is a C++ server that communicates directly with the ACM via hexadecimal messages over Ethernet. The Python package \texttt{acmpy} interfaces with ACMDAQ and provides high-level CCD control. The sequencer file, written in the LSST sequencer language \todonote{we still need to cite the LSST camera sequencer language reference, or the DAMIC-M internal note describing its adaptation.}, is compiled within \texttt{acmpy} and transmitted to the ACM FPGA to define the clock sequencing. Each ACM board is operated by an independent LDAQ instance, which can run either standalone or under the central DAQ (CDAQ) \todonote{we still need to cite the CDAQ software/documentation.}.
 
-For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. A summary of the timing parameters used for production modules is presented in Table~\ref{tab:sequencer_timing_dm13}. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (NDCM=1) readout.
+For each tested module, a dedicated sequencer and configuration file were prepared to define timing and voltage parameters. Table~\ref {tab: sequencer_timing_dm13} summarizes the timing parameters used for production modules. The table shows an example corresponding to a full-array image acquired with no binning, no image cuts, and single-skip (NDCM=1) readout.
 %
 \begin{table}[H]
 \centering
@@ -317,7 +315,7 @@ FPGA clock & clockperiod = 10 ns \\
 \end{tabular}
 \end{table}
 %
-In addition to the sequencer file, a configuration file in \texttt{.bcf} format specified the bias and clock-rail voltages applied during operation. The configuration parameters corresponding to the example above are summarized in Table~\ref{tab:config_dm13}.
+In addition to the sequencer file, a configuration file in \texttt{.bcf} format specifies the bias and clock-rail voltages applied during operation. The configuration parameters corresponding to the example above are summarized in Table~\ref{tab:config_dm13}.
 
 \begin{table}[H]
 \centering
@@ -369,7 +367,7 @@ DG\_1 (H/L), DG\_2 (H/L) & 0.0 / -5.0 \\
 \end{tabular}
 \end{table}
 
-The amplifier wire-bonding configuration and corresponding ACM channel mapping are shown in Table~\ref{tab:amp_mapping}. The charge-transfer direction, defined through sequencer and configuration function pointers, depended on the bonding configuration to ensure that charge was transferred toward the active output amplifiers. For the configuration shown here, the vertical transfer pointer was set to \texttt{Vtransfer21}.
+The amplifier wire-bonding configuration and corresponding ACM channel mapping are shown in Table~\ref{tab:amp_mapping}. The charge-transfer direction, defined through sequencer and configuration function pointers, depends on the bonding configuration to ensure charge transfers toward the active output amplifiers. For the configuration shown here, the vertical transfer pointer was set to \texttt{Vtransfer21}.
 
 \begin{table}[H]
 \centering
@@ -387,7 +385,7 @@ ACM channels      & 2, 3   & 3, 2   & 0, 1   & 1, 0   \\
 
 
 \subsection{Image list}
-A total of seven image types were acquired at high (185 K) and low (135 K) temperatures to characterize detector performance under different operating conditions. The datasets include full-array exposures, serial-register readouts, and multi-skip images. A summary of the image configurations and their primary objectives is presented in Table~\ref{tab:image_summary}.
+A total of seven image types were acquired at high (185 K) and low (135 K) temperatures to characterize detector performance under different operating conditions. The datasets include full-array exposures, serial-register readouts, and multi-skip images. Table~\ref {tab: image_summary} summarizes the image configurations and their primary objectives.
 
 
 \begin{table}[H]
@@ -429,7 +427,7 @@ Image\_7 & 135 & 500 & 1600×64   & 1×10  & 500 & Cropped region \\
 \end{tabular}
 \end{table}
 
-At high temperature (185 K), Image\_1 was used as an installation and basic functionality check with coarse binning to allow rapid verification of detector operation after installation. Image\_2 provided a serial-register readout for the identification of serial-register defects. Image\_3\_185 was acquired in serial-register mode with 500 skips to evaluate skipper readout performance. Image\_4\_185 consisted of a full-array exposure used to identify column defects and to evaluate readout noise.
+At high temperature (185 K), Image\_1 was used as an installation and basic functionality check with coarse binning to allow rapid verification of detector operation after installation. Image\_2 provided a serial-register readout to identify serial-register defects. Image\_3\_185 was acquired in serial-register mode with 500 skips to evaluate skipper readout performance. Image\_4\_185 consisted of a full-array exposure used to identify column defects and to evaluate readout noise.
 
 At low temperature (135 K), Image\_3\_135 was acquired in serial-register mode with multi-skip readout to evaluate Skipper performance under nominal operating conditions. Image\_4\_135 was a full-array long exposure used to study CTI, readout noise, and amplifier glow, as well as to visualize prominent column defects. In addition, this image was used to evaluate keV-scale energy reconstruction by examining Fe-55 events deposited across the full array. Images\_5–7 were acquired to study a region of the CCD array with a high density of Fe-55 events in both the surface and the bulk. These images were taken in multi-skip readout mode with different binning configurations. CTI studies were also performed using these datasets.
 
@@ -441,7 +439,7 @@ At low temperature (135 K), Image\_3\_135 was acquired in serial-register mode w
 \section{Procedure for data acquisition}
 \label{sec:procedure}
 
-Each module installation was coordinated between on-site installers and off-site testers, with three modules installed per batch. Before installation, on-site testers verified that the previous testing cycle had concluded, that the chamber was at room temperature and atmospheric pressure, and that the modules could be safely removed and stored in the nitrogen cabinet. The next batch of three production modules was then retrieved from the nitrogen cabinet for installation.
+Each module installation was coordinated between on-site installers and off-site testers, with three modules installed per batch. Before installation, on-site testers verified that the previous testing cycle had concluded, that the chamber was at room temperature and atmospheric pressure, and that the modules could be safely removed and stored in the nitrogen cabinet. The team then retrieved the next batch of three production modules from the nitrogen cabinet for installation.
 
 Figure~\ref{fig:MODULE_INSTALLATION} shows an example of a module batch installed inside the test chamber, with the production module having the highest ID positioned to the left of the cold finger and the remaining two in descending order to the right. The modules' flex cables were connected to extensions F, D, and E, corresponding to ACM boards 106, 109, and 110, respectively.
 
@@ -452,9 +450,9 @@ Figure~\ref{fig:MODULE_INSTALLATION} shows an example of a module batch installe
     \label{fig:MODULE_INSTALLATION}
 \end{figure}
 
-Following installation, the chamber was closed and pumped down to a pressure of ${\leq}1\times 10^{-4}\,\mathrm{mbar}$ at room temperature to remove residual volatile compounds and prevent condensation on cold surfaces. Cooldown then proceeded at a controlled rate of ${<}0.5\,\mathrm{K/min}$ to avoid thermal stress on the silicon. Approximately five hours were required to reach the first target temperature of 185 K. Thermal stability was defined by a temperature variation of the CCD boxes\footnote{Dedicated studies show that the temperature of the silicon die is within ${\sim}$5 K of the box temperature and that the temperature gradient across the silicon is negligible.} of less than $0.01\,\mathrm{K}$ over a five-minute interval.
+After installation, the chamber was closed and pumped down to ${\leq}1\times 10^{-4}\,\mathrm{mbar}$ at room temperature to remove residual volatile compounds and prevent condensation on cold surfaces. Cooldown then proceeded at a controlled rate of ${<}0.5\,\mathrm{K/min}$ to avoid thermal stress on the silicon. Approximately five hours were required to reach the first target temperature of 185 K. Thermal stability was defined by a temperature variation of the CCD boxes\footnote{Dedicated studies show that the temperature of the silicon die is within ${\sim}$5 K of the box temperature and that the temperature gradient across the silicon is negligible.} of less than $0.01\,\mathrm{K}$ over a five-minute interval.
 
-Once stable at 185 K, an installation check was performed. The CCDs were powered on with $V_{\mathrm{DD}}$ set to $-10$ V, allowing only the highest-energy tracks to be visible. Image\_1 (Table~\ref{tab:image_summary}) was acquired to verify proper installation of all modules and to obtain a rapid measurement of the readout noise. After confirming nominal operation, cooldown continued to 135 K, requiring approximately two additional hours.
+Once stable at 185 K, an installation check was performed. The CCDs were powered on with $V_{\mathrm{DD}}$ set to $-10$ V, allowing only the highest-energy tracks to be visible. Image\_1 (Table~\ref{tab:image_summary}) was acquired to verify proper installation of all modules and to obtain a rapid measurement of the readout noise. After confirming nominal operation, cooldown continued to 135 K and required approximately two additional hours.
 
 During cooldown, erase–epurge sequences were executed to reduce dark-current levels associated with surface traps formed during power-up. At 185 K, the following sequence was performed:
 
@@ -470,12 +468,12 @@ After completing the 185 K sequence, the chamber continued cooling at ${<}0.5\,\
 
 During both procedures, $V_{\mathrm{DD}}$ was turned off (set to $-6$ V) and restored only immediately before image acquisition at 135 K.
 
-In contrast to on-surface testing, the high-temperature measurements in this campaign were performed after low-temperature operation, during the controlled warm-up from 135 K toward room temperature. This sequence was chosen to mimic the thermal cycle implemented in the LBC, in which erase and epurge steps are performed at 185 K and 135 K (with only epurge at 135 K). Unlike standard LBC operations, no erase or epurge steps were performed at 150 K during these tests.
+In contrast to on-surface testing, the high-temperature measurements in this campaign were performed after low-temperature operation, during the controlled warm-up from 135 K toward room temperature. This sequence mimics the thermal cycle implemented in the LBC, in which erase and epurge steps are performed at 185 K and 135 K (with only epurge at 135 K). Unlike standard LBC operations, these tests performed no erase or epurge steps at 150 K.
 
 
 \subsection{Acquisition sequence} 
 
-The following image acquisition sequence was performed at 135 K and 185 K. The number of exposures for each image type and the corresponding readout times are summarized below.
+The following image acquisition sequence was performed at 135 K and 185 K. The table below summarizes the number of exposures for each image type and the corresponding readout times.
 
 \paragraph{Acquisition at 135 K}
 
@@ -500,7 +498,7 @@ After completion of the 135 K dataset, the system was warmed back to 185 K under
     \item 1 $\times$ Image\_1 \hfill (readout time: 2\,min 12\,s)
 \end{itemize}
 
-The total acquisition time at 185 K was 5\,hr 22\,min 8\,s. This sequence of data acquisitions allowed two module batches to be tested every week.
+The total acquisition time at 185 K was 5\,hr 22\,min 8\,s. This data-acquisition sequence allowed two module batches to be tested each week.
 
 % \subsection{Online quality checks}
 % Baseline stability, out-of-range pixels, saturation, readout artifacts, unexpected pattern noise, etc.
@@ -512,7 +510,7 @@ The total acquisition time at 185 K was 5\,hr 22\,min 8\,s. This sequence of dat
 \section{High-temperature image analyses}
 \label{sec:hightemp}
 
-As in the die- and module-level surface testing, a series of measurements was performed at 185~K to facilitate the efficient identification of defects in each CCD within each module. Although 185~K is not the nominal operating temperature of the DAMIC-M experiment, additional images were acquired at this temperature to further characterize the overall Skipper-CCD performance of each module. These measurements were used to evaluate key performance metrics, including readout noise, single-electron resolution, dark current, and gain, and to investigate potential temperature-dependent effects.
+As in the die- and module-level surface testing, a series of measurements at 185~K were performed to efficiently identify defects in each CCD within each module. Although 185~K is not the nominal operating temperature of the DAMIC-M experiment, additional images were acquired at this temperature to further characterize each module's overall Skipper-CCD performance. These measurements were used to evaluate key performance metrics, including readout noise, single-electron resolution, dark current, and gain, and to investigate potential temperature-dependent effects.
 
 
 % \subsection{Skipper performance}
@@ -543,7 +541,7 @@ C_j - \tilde{C}_j > 6 \times \mathrm{MAD}_j \quad \text{(hot column)},
 C_j - \tilde{C}_j < -6 \times \mathrm{MAD}_j \quad \text{(cold column)}.
 \end{equation}
 
-The result of this procedure is a defect map detailing the locations, types, and numbers of flagged columns for each CCD in each module. Figure~\ref{fig:composite_image} shows composite-image defect maps for the four CCDs in module DM06. In addition, the pixel-array values in the composite image are significantly higher than those in the overscan regions due to charge accumulated from dark current, giving rise to the steps visible in Fig.~\ref{fig:composite_image}. For this same type of image collected at low temperature, these overscan steps are used in one of the charge-transfer inefficiency (CTI) studies described in Section~\ref{sec:CTI}.
+This procedure produces a defect map detailing the locations, types, and numbers of flagged columns for each CCD in each module. Figure~\ref{fig:composite_image} shows composite-image defect maps for the four CCDs in module DM06. In addition, the pixel-array values in the composite image are significantly higher than those in the overscan regions due to charge accumulated from dark current, giving rise to the steps visible in Fig.~\ref{fig:composite_image}. For this same type of image collected at low temperature, these overscan steps are used in one of the charge-transfer inefficiency (CTI) studies described in Section~\ref{sec:CTI}.
 
 %
 \begin{figure}[H]
@@ -577,7 +575,7 @@ Module DM-08 contains a large column defect in CCD A that produces amplifier glo
 
 In a serial register (SR) image, charge from the pixel array is not transferred into the serial register. Instead, the SR itself is exposed for 2~s to allow charge to accumulate before being clocked and read out. This procedure is repeated 20 times, producing an image in which each row corresponds to a successive readout of the serial register.
 
-Unlike full-array images, serial-register images do not contain two-dimensional particle tracks. Charge deposition in the serial register appears as horizontal streaks across the image, as illustrated in Fig.~\ref{fig:DM18_SR_defects} for the four CCDs in module DM-18. A serial-register defect manifests as a vertical column of excess charge persisting across multiple readouts.
+Unlike full-array images, serial-register images do not contain two-dimensional particle tracks. Charge deposition in the serial register appears as horizontal streaks across the image, as illustrated in Fig.~\ref{fig:DM18_SR_defects} for the four CCDs in module DM-18. A serial-register defect appears as a vertical column of excess charge that persists across multiple readouts.
 %
 Defects in both serial registers of each CCD were identified using the same median absolute deviation MAD-based algorithm described in Section~\ref{sec:column_defects}, applied to the column-wise median signal.
 
@@ -590,9 +588,9 @@ Defects in both serial registers of each CCD were identified using the same medi
     \label{fig:DM18_SR_defects}
 \end{figure}
 
-Across all modules and CCDs, the serial-register defect count remains low, with a global mean of 0.24 defects per CCD. The majority of CCDs exhibit no detectable defects, while a small subset shows a single defective column in the serial register. No CCD was observed to contain more than one serial-register defect. 
+Across all modules and CCDs, the serial-register defect count remains low, with a global mean of 0.24 defects per CCD. Most CCDs show no detectable defects, while a small subset shows a single defective column in the serial register. No CCD was observed to contain more than one serial-register defect. 
 %
-A limited number of modules contain serial-register defects in more than one CCD extension. In particular, modules DM-05, DM-06, DM-13, DM-18, DM-20, and DM-23 each show defects in at least two CCDs. Nevertheless, even in these cases, the multiplicity of defects per CCD remains limited to a single column, and the overall incidence of defects remains low across the production set.
+A limited number of modules contain serial-register defects in more than one CCD extension. In particular, modules DM-05, DM-06, DM-13, DM-18, DM-20, and DM-23 each show defects in at least two CCDs. Nevertheless, even in these cases, the defect multiplicity per CCD remains limited to a single column, and the overall incidence of defects remains low across the production set.
 
 
 
@@ -606,7 +604,7 @@ A limited number of modules contain serial-register defects in more than one CCD
 \label{sec:lowtemp}
 \subsection{Skipper performance}
 DAMIC-M CCDs are operated in skipper mode to achieve single-electron resolution. Nominal skipper performance was verified by reading out 630 $x$-overscan pixels with 500 NDCMs.
-When the test system is operated at 135\,K, the dark current is greatly reduced relative to higher-temperature operation. To estimate skipper performance under these conditions, 10 pixels from the serial register were transferred into the floating gate before measurement to ensure sufficient charge in the image pixels. This was done by collecting six \texttt{Image\_3\_135}.
+At 135\,K, the test system's dark current is greatly reduced relative to higher-temperature operation. To estimate skipper performance under these conditions, we transferred 10 pixels from the serial register into the floating gate before measurement to ensure sufficient charge in the image pixels. This was done by collecting six \texttt{Image\_3\_135}.
 
 The distribution of pixel values, averaged over the NDCMs, was fit with a Poisson distribution convolved with a Gaussian. The distance between consecutive peaks provides an estimate of the amplifier gain (in ADU/$e^-$), while the width of the peaks (measured as the standard deviation) provides an estimate of the readout noise.
 The Poisson rate parameter $\lambda$ provides the average charge collected per pixel, which is proportional to the serial register dark current plus clock-induced charge (CIC). CIC arises from the rapidly changing electric fields caused by voltage swings of the gates during charge transfer and depends on the clock amplitude and rise time~\cite{Oscura:2023qik}. Serial clocks are the primary contributors to CIC, since they swing at a higher frequency than parallel clocks.
@@ -621,14 +619,7 @@ Figure~\ref{fig:DM09_SE_fits} illustrates the Poisson-convolved-Gaussian fits to
     }
     \label{fig:DM09_SE_fits}
 \end{figure}
-The skipper performance metrics extracted from the Poisson–Gaussian fits to the \texttt{Image\_3\_135} data are summarized in Figs.~\ref{fig:Single_e_res_all}--\ref{fig:DC_all}. These figures present the fitted single-electron resolution ($\sigma$), amplifier gain, and dark current for all four CCD extensions (A–D) across modules DM-01 to DM-28. The dotted horizontal line indicates the mean value across all extensions, and the shaded band represents $\pm 1\sigma$ about the mean.
-
-Figure~\ref{fig:Single_e_res_all} shows the single-electron resolution derived from the Gaussian width of the fitted charge peaks. 
-
-
-Figure~\ref{fig:Gain_all} presents the amplifier gain obtained from the spacing between consecutive peaks in the charge distribution. 
-
-Figure~\ref{fig:DC_all} shows the dark current inferred from the fitted Poisson rate parameter $\lambda$, converted to units of $e^-$/pixel/day.
+The skipper performance metrics extracted from the Poisson–Gaussian fits to the \texttt{Image\_3\_135} data are summarized in Figs.~\ref{fig:Single_e_res_all}--\ref{fig:DC_all}: the single-electron resolution ($\sigma$) derived from the Gaussian width of the fitted charge peaks, the amplifier gain obtained from the spacing between consecutive peaks, and the dark current inferred from the fitted Poisson rate parameter $\lambda$ (converted to $e^-$/pixel/day), each shown for all four CCD extensions (A–D) across modules DM-01 to DM-28. In each figure, the dotted horizontal line indicates the mean value across all extensions, and the shaded band represents $\pm 1\sigma$ about the mean.
 
 \begin{figure}[H]
     \centering
@@ -646,7 +637,7 @@ The single-electron resolution is tightly clustered around the ensemble mean of 
     \label{fig:Gain_all}
 \end{figure}
 
-Amplifier gain is more broadly distributed than the resolution, with most extensions falling between $1.2$ and $1.4$\,ADU/$e^-$ around the ensemble mean of $1.308$\,ADU/$e^-$. DM-03 and DM-25 each contain one extension with anomalously low gain (near $1.0$--$1.06$\,ADU/$e^-$), while DM-08, DM-11, and DM-16 each contain one extension approaching or exceeding $1.45$\,ADU/$e^-$, the highest values in the dataset.
+Amplifier gain is more broadly distributed than the resolution, with most extensions falling between $1.2$ and $1.4$\,ADU/$e^-$, centered on the ensemble mean of $1.308$\,ADU/$e^-$. DM-03 and DM-25 each contain one extension with anomalously low gain (near $1.0$--$1.06$\,ADU/$e^-$), while DM-08, DM-11, and DM-16 each contain one extension approaching or exceeding $1.45$\,ADU/$e^-$, the highest values in the dataset.
 
 \begin{figure}[H]
     \centering
@@ -657,7 +648,7 @@ Amplifier gain is more broadly distributed than the resolution, with most extens
 
 The dark-current distribution at 135\,K is strongly skewed by a small number of modules well above the ensemble mean of $0.388\,e^-$/pix/day. DM-08 is the most extreme outlier, exceeding $10\,e^-$/pix/day in two extensions, consistent with the large column defect described in Sec.~\ref{sec:column_defects} that produces amplifier glow in that module. DM-10 and DM-12 are the next-highest modules, at roughly $3$ and $1$--$1.4\,e^-$/pix/day, respectively. DM-24, DM-25, and DM-26 are also elevated relative to the ensemble mean, consistent with the installation-related dark-current increase noted in the Executive Summary (Sec.~\ref{sec:summary}).
 
-For comparison, Fig.~\ref{fig:DC_high_all} shows the same dark-current measurement repeated at 185\,K (\texttt{Image\_4\_185}), and Fig.~\ref{fig:DC_ratio_all} shows the ratio of the 135\,K to 185\,K dark current for each extension. The ratio quantifies the temperature dependence of the dark current on a per-extension basis and is a useful diagnostic for identifying extensions whose dark current does not follow the expected thermal-activation behavior.
+For comparison, Fig.~\ref{fig:DC_high_all} shows the same dark-current measurement repeated at 185\,K (\texttt{Image\_4\_185}), and Fig.~\ref{fig:DC_ratio_all} shows the ratio of the 135\,K to 185\,K dark current for each extension. The ratio quantifies the temperature dependence of the dark current per extension and is a useful diagnostic for identifying extensions whose dark current does not follow the expected thermal-activation behavior.
 
 \begin{figure}[H]
     \centering
@@ -675,7 +666,7 @@ At 185\,K the dark-current distribution is markedly more uniform than at 135\,K:
     \label{fig:DC_ratio_all}
 \end{figure}
 
-The ratio highlights the same modules identified as 135\,K dark-current outliers -- DM-08, DM-10, DM-12, and DM-24--DM-26 -- as having anomalously high 135-to-185\,K ratios, several of which exceed the $10^{-2}$ clipping threshold of the source plot. This is consistent with the 135\,K excess in these modules arising from a mechanism (e.g.\ surface or defect-related leakage) that does not scale with temperature the way the bulk thermally-activated dark current dominating the 185\,K measurement does.
+The ratio highlights the same modules identified as 135\,K dark-current outliers -- DM-08, DM-10, DM-12, and DM-24--DM-26 -- as having anomalously high 135-to-185\,K ratios, several of which exceed the $10^{-2}$ clipping threshold of the source plot. This is consistent with the 135\,K excess in these modules arising from a mechanism (e.g.\ surface- or defect-related leakage) that does not scale with temperature the way the bulk thermally activated dark current dominating the 185\,K measurement does.
 
 
 \subsection{Fe-55 events}
@@ -699,7 +690,7 @@ The top panel of Fig.~\ref{fig:ironfoil} shows a scatter plot of $\sigma_{xy}$ v
 These events consist predominantly of $^{55}$Fe X-rays originating from the iron foils. 
 Two clearly separated populations are observed, corresponding to front- and back-side interactions. 
 The displacement of these populations along the $x$-axis reflects the physical placement of the iron foils above specific regions of the CCD. 
-The bottom panel of Fig.~\ref{fig:ironfoil} presents the energy spectrum of front-side clusters selected with $\sigma_{xy}<1$\,pixel. 
+The bottom panel of Fig.~\ref{fig:ironfoil} presents the energy spectrum of front-side clusters selected with $\sigma_{xy}<1$\, pixel. 
 Because front-side events deposit their charge over fewer pixels, they exhibit a higher signal-to-noise ratio and therefore a cleaner spectral structure.
 
 It is important to distinguish between the surface and underground analyses of the $^{55}$Fe data. 
@@ -785,7 +776,7 @@ To quantify charge asymmetries around this core, four adjacent regions are defin
 \item \textbf{Left:} region located at negative $\Delta x$, probing charge extending to the left of the cluster core.
 \end{itemize}
 
-An example composite cluster illustrating these regions is shown in Fig.~\ref{fig:front_composite_example}.
+Fig.~\ref {fig: front_composite_example} shows an example composite cluster illustrating these regions.
 The colored boxes indicate the areas used to evaluate the directional charge fractions.
 
 \begin{figure}[H]
@@ -811,7 +802,7 @@ f_{\mathrm{Above}} \approx f_{\mathrm{Below}},
 f_{\mathrm{Left}} \approx f_{\mathrm{Right}}.
 \end{equation}
 
-Systematic differences between opposite regions indicate preferential redistribution of charge along one direction, consistent with asymmetric transfer effects.
+Systematic differences between opposite regions indicate preferential charge redistribution in one direction, consistent with asymmetric transfer effects.
 
 In practice, two quantities derived from these regional fractions are used as compact CTI-sensitive observables,
 
@@ -847,7 +838,7 @@ The serial CTI-sensitive fraction is systematically smaller than its parallel co
 \subsubsection*{Back-Side CTI Diagnostics}
 
 Back-side events, which experience longer drift distances before reaching the pixel array, are particularly sensitive to charge-transport effects. 
-For the back-side composite cluster, one-dimensional projections are constructed within fixed edge slabs of the composite grid in order to isolate the extended tails of the charge distribution.
+For the back-side composite cluster, one-dimensional projections are constructed within fixed edge slabs of the composite grid to isolate the extended tails of the charge distribution.
 
 From these projections, the following quantities are evaluated:
 
@@ -858,10 +849,10 @@ From these projections, the following quantities are evaluated:
 \item Skewness.
 \end{itemize}
 
-The projection integrals probe the amount of charge residing in extended tails, while the RMS and skewness quantify the width and directional asymmetry of the charge distribution. 
+The projection integrals probe the charge in extended tails, while the RMS and skewness quantify the width and directional asymmetry of the charge distribution. 
 Because these quantities are derived from projections of the composite cluster, they characterize the systematic morphology of the average back-side event rather than the spread of individual clusters.
 
-The RMS of the projections provides a measure of the width of the average back-side cluster distribution in each direction. 
+The RMS of the projections measures the width of the average back-side cluster distribution in each direction. 
 Since lateral charge diffusion during the drift through the silicon bulk is expected to be approximately isotropic in the plane of the CCD, diffusion-dominated transport predicts similar RMS values for the serial and parallel projections. 
 Significant deviations between the two directions would therefore indicate directional charge redistribution consistent with CTI effects or other transport asymmetries.
 
@@ -901,13 +892,13 @@ The RMS of the parallel projection is more tightly distributed than the serial-d
 \subsection{keV-scale calibration}
 \label{sec:kev_calibration}
 
-$^{55}$Fe decays produce two characteristic X-ray lines in the sensor, Mn K$\alpha$ (5.90\,keV) and Mn K$\beta$ (6.49\,keV), which provide an absolute keV-scale calibration of the pixel charge measured in electrons. Front-side events ($\sigma_{xy}<1$\,pixel, Sec.~\ref{sec:CTI}) are used for this calibration because their compact clusters yield a substantially better-resolved spectrum than the more diffuse back-side population (Fig.~\ref{fig:ironfoil}, bottom). Figure~\ref{fig:energy_vs_sigmaxy} shows this front/back separation directly in the energy-$\sigma_{xy}$ plane, for a representative extension (DM01, Ext.\ 4), at both the nominal LBC bias point and the revised $\mathrm{VR}=-6$\,V setting discussed below.
+$^{55}$Fe decays produce two characteristic X-ray lines in the sensor, Mn K$\alpha$ (5.90\,keV) and Mn K$\beta$ (6.49\,keV), which provide an absolute keV-scale calibration of the pixel charge measured in electrons. Front-side events ($\sigma_{xy}<1$\, pixel, Sec.~\ref{sec:CTI}) are used for this calibration because their compact clusters yield a substantially better-resolved spectrum than the more diffuse back-side population (Fig.~\ref{fig:ironfoil}, bottom). Figure~\ref{fig:energy_vs_sigmaxy} shows this front/back separation directly in the energy-$\sigma_{xy}$ plane, for a representative extension (DM01, Ext.\ 4), at both the nominal LBC bias point and the revised $\mathrm{VR}=-6$\,V setting discussed below.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.48\linewidth]{figures/energy_vs_sigmaxy_VRm3V.png}
     \includegraphics[width=0.48\linewidth]{figures/energy_vs_sigmaxy_VRm6V.png}
-    \caption[Cluster energy vs.\ $\sigma_{xy}$, VR comparison]{Reconstructed cluster energy versus lateral spread $\sigma_{xy}$ for DM01, Ext.\ 4, at the nominal LBC operating point, $\mathrm{VR}=-3$\,V (left), and at $\mathrm{VR}=-6$\,V (right). The low-$\sigma_{xy}$ (front-side) and high-$\sigma_{xy}$ (back-side) populations are both visible, each showing the K$\alpha$/K$\beta$ two-line structure. Lowering VR shifts the front-side population to higher, more nearly nominal energies and increases the population density, consistent with the reduced energy-scale shift discussed in the text.}
+    \caption[Cluster energy vs.\ $\sigma_{xy}$, VR comparison]{Reconstructed cluster energy versus lateral spread $\sigma_{xy}$ for DM01, Ext.\ 4, at the nominal LBC operating point, $\mathrm{VR}=-3$\,V (left), and at $\mathrm{VR}=-6$\,V (right). The low-$\sigma_{xy}$ (front-side) and high-$\sigma_{xy}$ (back-side) populations are both visible, each showing the K$\alpha$/K$\beta$ two-line structure. Lowering VR shifts the front-side population to higher, near-nominal energies and increases the population density, consistent with the reduced energy-scale shift discussed in the text.}
     \label{fig:energy_vs_sigmaxy}
 \end{figure}
 
@@ -932,7 +923,7 @@ A dedicated high-statistics dataset near $500\,e^-$ was used to study the respon
     \label{fig:nonlinearity}
 \end{figure}
 
-Parameter scans were performed over the module biases and most rail voltages to identify the origin of the shift. The largest effect was found when lowering the reference voltage ($\mathrm{VR}$) from its nominal LBC science-run value of $-3$\,V to $-6$\,V, which reduces the observed nonlinear effect: Fig.~\ref{fig:vr_scan} compares the front/back energy spectra at the two settings, showing that $\mathrm{VR}=-6$\,V brings the front- and back-side K$\alpha$ peaks into much closer agreement than the nominal $\mathrm{VR}=-3$\,V setting. The revised parameters were not observed to affect gain, single-electron resolution, or dark current relative to the nominal LBC operating point.
+Parameter scans were performed over the module biases and most rail voltages to identify the origin of the shift. The largest effect was found when lowering the reference voltage ($\mathrm{VR}$) from its nominal LBC science-run value of $-3$\,V to $-6$\,V, which reduces the observed nonlinear effect: Fig.~\ref{fig:vr_scan} compares the front/back energy spectra at the two settings, showing that $\mathrm{VR}=-6$\,V brings the front- and back-side K$\alpha$ peaks into much closer agreement than the nominal $\mathrm{VR}=-3$\,V setting. The revised parameters did not affect gain, single-electron resolution, or dark current significantly relative to the nominal LBC operating point.
 
 \begin{figure}[H]
     \centering
@@ -944,7 +935,7 @@ Parameter scans were performed over the module biases and most rail voltages to 
 
 \subsection{Crosstalk}
 
-Crosstalk occurs when a pixel in a source CCD containing a genuine charge signal induces a small signal in the corresponding pixel of another CCD, referred to as the destination CCD. This effect originates from electronic coupling between the readout channels. When accumulated over many events, it leads to a systematic linear correlation between the charges measured in corresponding pixels of the source (src) and destination (dst) CCDs. 
+Crosstalk occurs when a pixel in a source CCD with a genuine charge signal induces a small signal in the corresponding pixel of another CCD, called the destination CCD. This effect originates from electronic coupling between the readout channels. When accumulated over many events, it leads to a systematic linear correlation between the charges measured in corresponding pixels of the source (src) and destination (dst) CCDs. 
 
 The crosstalk coefficient for a given (src, dst) pair quantifies the strength of this coupling. It is defined as the slope of the linear correlation between the simultaneous readouts of corresponding pixels in the two CCDs and is computed as follows.
 
@@ -986,10 +977,10 @@ q_{\mathrm{dst}}^{\mathrm{corrected}} = q_{\mathrm{dst}}
 \, q_{\mathrm{src}} .
 \end{equation}
 
-Here $ \alpha_{\mathrm{null}}$ represents the null-hypothesis correction, which accounts for correlations arising from statistical fluctuations or selection effects. It is computed by randomizing the spatial positions of all seed pixels in the source image, breaking the correlation.
+Here, $ \ alpha _ {\ mathrm {null}} $: the horizontal axis shows the source CCD pixel charge, and the vertical axis shows the destination CCD pixel charge. It is computed by randomizing the spatial positions of all seed pixels in the source image, breaking the correlation.
 
 
-Figure~\ref{fig:CrosstalkDM16} shows the pairwise crosstalk characterization between the four CCD channels. Each panel corresponds to an ordered pair (src, dst), where the pixel charge of the source CCD is indicated on the horizontal axis and the pixel charge of the destination CCD on the vertical axis. Each blue point represents the charge for the selected seed pixels for both source and destination CCDs. The black line represents the computed linear correlation between the source and destination pixel charges, where its slope corresponds to the crosstalk coefficient, and the red dashed line represents the linear correlation corrected by the null hypothesis.
+Figure~\ref{fig:CrosstalkDM16} shows the pairwise crosstalk characterization between the four CCD channels. Each panel corresponds to an ordered pair (src, dst), where the horizontal axis shows the source CCD pixel charge and the vertical axis shows the destination CCD pixel charge. Each blue point represents the charge for the selected seed pixels for both source and destination CCDs. The black line represents the computed linear correlation between the source and destination pixel charges; its slope corresponds to the crosstalk coefficient, and the red dashed line represents the linear correlation corrected under the null hypothesis.
 
 
 \begin{figure}[H]
@@ -1011,7 +1002,7 @@ Figure~\ref{fig:CrosstalkAll} summarizes the null-hypothesis–corrected crossta
     \label{fig:CrosstalkAll}
 \end{figure}
 
-From this study, it was concluded that a single crosstalk correction matrix can be consistently applied across all ACMs and modules. It should be noted, however, that not all modules were analyzed, as the current methodology is not suitable for determining crosstalk in modules exhibiting high dark current.
+This study concluded that a single crosstalk correction matrix can be consistently applied across all ACMs and modules. However, not all modules were analyzed, as the current methodology is not suitable for determining crosstalk in modules with high dark current.
 
 \FloatBarrier
 
@@ -1064,11 +1055,11 @@ The four modules recommended for the outermost array positions are therefore DM1
 
 This report has presented the underground characterization of the 28 DM production modules tested at LSM between May and October 2025, evaluated against the sensor-level performance requirements of the DAMIC-M experiment. Of the modules tested, 103 CCDs are operational in the final array configuration, spread across 26 modules with four operational CCDs each except DM11, which has three, for an effective target mass of approximately 347\,g (Sec.~\ref{sec:summary}).
 
-Across the ensemble, single-electron resolution, amplifier gain, and dark current at 135\,K are consistent with expectations for the large majority of extensions, with column and serial-register defect rates remaining low overall (Secs.~\ref{sec:hightemp}, \ref{sec:lowtemp}). Vertical (parallel-direction) charge transfer inefficiency is consistently observed across the module set under nominal LBC operating parameters, and DM-12 in particular shows a genuine directional asymmetry in its back-side cluster morphology that merits further investigation (Sec.~\ref{sec:CTI}). The keV-scale energy-scale shift observed in the $^{55}$Fe calibration lines is well explained by pixel-charge nonlinearity in the skipper amplifier response, and is partially mitigated by lowering the reference voltage to $\mathrm{VR}=-6$\,V (Sec.~\ref{sec:kev_calibration}). A single crosstalk correction matrix was found to be consistently applicable across all ACMs and modules tested.
+Across the ensemble, single-electron resolution, amplifier gain, and dark current at 135\,K are consistent with expectations for most extensions, with column and serial-register defect rates remaining low overall (Secs.~\ref{sec:hightemp}, \ref{sec:lowtemp}). Vertical (parallel-direction) charge transfer inefficiency is consistently observed across the module set under nominal LBC operating parameters, and DM-12 in particular shows a genuine directional asymmetry in its back-side cluster morphology that merits further investigation (Sec.~\ref{sec:CTI}). The keV-scale energy-scale shift observed in the $^{55}$Fe calibration lines is well explained by pixel-charge nonlinearity in the skipper amplifier response, and is partially mitigated by lowering the reference voltage to $\mathrm{VR}=-6$\, V (Sec.~\ref{sec:kev_calibration}). A single crosstalk correction matrix was consistently applicable across all ACMs and modules tested.
 
 DM-08 and DM-12 are excluded from the final detector array due to a large column defect and associated amplifier glow (DM-08) and non-operational extensions (DM-12). Based on dark current as the primary discriminating metric, cross-checked against single-electron resolution and CTI, DM10, DM11, DM24, and DM26 are recommended for the outermost positions of the final array (Sec.~\ref{sec:outermost_modules}).
 
-Two items remain open following this campaign. The apparent failure of Extension 2 in DM11, which operated normally during on-surface testing at UW but was found non-functional at LSM, warrants investigation of its wire bonding before final array integration. In addition, the residual pixel-charge nonlinearity at $\mathrm{VR}=-6$\,V still needs to be characterized with higher statistics to confirm that the revised bias point fully addresses the energy-scale shift.
+Two items remain open following this campaign. The apparent failure of Extension 2 in DM11, which operated normally during on-surface testing at UW but was found non-functional at LSM, warrants investigation of its wire bonding before final array integration. In addition, the residual pixel-charge nonlinearity at $\mathrm{VR}=-6$\,V still needs higher-statistics characterization to confirm that the revised bias point fully addresses the energy-scale shift.
 
 % =====================================================
 %                       Appendix
@@ -1082,7 +1073,7 @@ Two items remain open following this campaign. The apparent failure of Extension
 
 \paragraph{Detector status.} Of the 28 modules tested underground, 103 CCDs are operational in the final detector configuration, spread across 26 production modules with four CCDs each, except DM11, which has three (Ext.\ 2 was found non-functional despite working during the on-surface campaign at UW). DM08 and DM12 are excluded from the final array due to non-operational extensions and large defects; all plots and summary statistics elsewhere in this report that quote ensemble averages exclude these two modules unless noted otherwise. The effective target mass of the final array is $\approx 347$\,g. DM10, DM24, DM25, and DM26 exhibit consistently higher dark current than the rest of the ensemble (Sec.~\ref{sec:lowtemp}), and vertical (parallel-direction) CTI is observed across modules under the nominal LBC operating parameters (Sec.~\ref{sec:CTI}); lowering $\mathrm{VR}$ to $-6$\,V reduces the $^{55}$Fe energy-scale shift, though the resulting non-linearity still needs to be characterized with higher statistics (Sec.~\ref{sec:kev_calibration}).
 
-The full per-module breakdown of these metrics (operational CCDs, gain, SER, dark current, and CTI fractions) is given in Table~\ref{tab:summary_metrics}.
+Table~\ref {tab: summary_metrics} gives the full per-module breakdown of these metrics (operational CCDs, gain, SER, dark current, and CTI fractions).
 
 % Example: include a per-CCD grid of something
 % \figgridfour
