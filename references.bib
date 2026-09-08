@@ -1,0 +1,89 @@
+% =============================================================================
+% references.bib — LSM_Module_Test_Report
+%
+% This report had NO bibliography file at all before 2026-07-08 (Phase 3 of
+% the completeness audit, see completeness_audit.md). Six citation keys are
+% used in main.tex; confidence levels noted per entry. Cross-check against
+% the sensor paper's references.bib (DAMIC_M_Sensors_Paper/) where the same
+% underlying reference is used in both documents, to keep the two in sync.
+% =============================================================================
+
+@book{Janesick:2001,
+  title     = {Scientific Charge-Coupled Devices},
+  author    = {Janesick, James R.},
+  publisher = {SPIE Press},
+  series    = {SPIE Press Monograph},
+  volume    = {PM83},
+  address   = {Bellingham, WA},
+  year      = {2001},
+  note      = {CONFIRMED via web search 2026-07-08. Standard CCD reference textbook.}
+}
+
+@article{Oscura:2023qik,
+  title   = {Skipper-{CCD} sensors for the {Oscura} experiment: requirements and preliminary tests},
+  author  = {Cervantes-Vergara, B.~A. and Perez, S. and Estrada, J. and Botti, A. and Chavez, C.~R. and Chierchie, F. and others},
+  journal = {Journal of Instrumentation},
+  volume  = {18},
+  pages   = {P08016},
+  year    = {2023},
+  eprint  = {2304.04401},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.ins-det},
+  doi     = {10.1088/1748-0221/18/08/P08016},
+  note    = {CONFIRMED via cross-reference 2026-07-08 --- same paper as
+             \texttt{Oscura2023} in the sensor paper's bib (key differs only
+             by INSPIRE-style formatting used in this document's original
+             citations). Content match: CIC dependence on clock amplitude/rise
+             time, matching the citation context here.}
+}
+
+@article{DAMIC-M:2024ooa,
+  title   = {The {DAMIC-M} Low Background Chamber},
+  author  = {{DAMIC-M Collaboration} and Gaior, R. and others},
+  journal = {Journal of Instrumentation},
+  volume  = {19},
+  pages   = {T11010},
+  year    = {2024},
+  eprint  = {2407.17872},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.ins-det},
+  note    = {HIGH CONFIDENCE via web search 2026-07-08 --- describes the LBC's
+             readout electronics, DAQ software, and slow control, matching
+             the citation context (slow control system description). Same
+             paper likely relevant to the sensor paper's LBC discussions ---
+             consider adding there too.}
+}
+
+@misc{Gaior:2023wfr,
+  title  = {{ACM} data-acquisition electronics for skipper-{CCD} readout},
+  author = {Gaior, R. and others},
+  year   = {2023},
+  note   = {UNCONFIRMED --- author (R. Gaior, DAMIC-M electronics) and topic
+            are right, but the exact 2023 proceedings/venue was not found via
+            web search 2026-07-08 (likely a conference proceedings, e.g.\
+            TWEPP/NSS-MIC-style, not easily surfaced). Same stub as
+            \texttt{Gaior2023wfr} in the sensor paper's bib --- ask
+            Alvaro/Paolo for the exact reference, then fix in both documents.}
+}
+
+@misc{slowcontrol,
+  title = {[PLACEHOLDER --- internal DAMIC-M slow-control technote, forthcoming]},
+  note  = {Confirmed with Diego 2026-09-07: an internal technote describing the
+           custom C-based back-end / PHP front-end slow-control software is
+           being written and will replace this placeholder once available.
+           Intentionally left in \texttt{main.tex} alongside
+           \texttt{DAMIC-M:2024ooa} for the Sec.~2 slow-control citation.}
+}
+
+@article{Traina2025,
+  title   = {First Production of Skipper-{CCD} Modules for the {DAMIC-M} Experiment},
+  author  = {{DAMIC-M Collaboration}},
+  journal = {arXiv preprint},
+  year    = {2025},
+  eprint  = {2509.06943},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.ins-det},
+  note    = {Added 2026-07-08 for the Sec.~5.2 module-packaging cross-reference
+             (was a dangling \texttt{sec:modulepack} internal ref, fixed to
+             cite this paper instead). Same entry as the sensor paper's bib.}
+}
